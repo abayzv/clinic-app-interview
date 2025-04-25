@@ -26,4 +26,11 @@
             </div>
         </div>
     </div>
+
+    <x-modal-form modal-id="createCategoryModal" title="Create Categories" action="{{ route('categories.index') }}"
+        method="POST">
+        @slot('body')
+            @include('categories.partials.create')
+        @endslot
+    </x-modal-form>
 </x-app-layout>
