@@ -7,15 +7,12 @@ to: resources/views/<%= resource %>/partials/create.blade.php
     const [name, typeRaw] = pair.split(':');
     return { name: name.trim(), type: typeRaw.trim() };
   });
-
   const label = (str) => str.charAt(0).toUpperCase() + str.slice(1).replace(/_/g, ' ');
 %>
-
 <% fieldPairs.forEach(({ name, type }) => { %>
   <!-- <%= label(name) %> -->
   <div class="flex flex-col items-start">
     <x-input-label for="<%= name %>" :value="__(' <%= label(name) %>')" />
-
     <% if (type === 'select') { %>
       <x-select id="<%= name %>" name="<%= name %>" class="mt-1 block w-full" required>
         <option value="">Select a <%= label(name) %></option>
@@ -26,7 +23,6 @@ to: resources/views/<%= resource %>/partials/create.blade.php
     <% } else { %>
       <x-text-input id="<%= name %>" name="<%= name %>" type="<%= type %>" class="mt-1 block w-full" required />
     <% } %>
-
     <x-input-error class="mt-2" :messages="$errors->get('<%= name %>')" />
   </div>
 <% }); %>
