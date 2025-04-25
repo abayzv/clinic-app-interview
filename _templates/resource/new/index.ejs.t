@@ -6,7 +6,7 @@ to: resources/views/<%= resource %>/index.blade.php
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('<<%= resource.charAt(0).toUpperCase() + resource.slice(1) %>>') }}
+                {{ __('<%= resource.charAt(0).toUpperCase() + resource.slice(1) %>') }}
             </h2>
 
             <button onclick="openModal('create<%= resource.charAt(0).toUpperCase() + resource.slice(1) %>Modal')"
@@ -21,7 +21,6 @@ to: resources/views/<%= resource %>/index.blade.php
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <x-data-table class="w-full" :items="$<%= resource %>" :columns="[
-                        'name' => 'Name',
                         'created_at' => 'Created At',
                     ]" paginated>
                         @slot('actions', function ($item) {
