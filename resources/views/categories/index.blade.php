@@ -13,10 +13,18 @@
                         'name' => 'Nama',
                         'created_at' => 'Tanggal Daftar',
                     ]" paginated>
-                        @slot('actions', function ($category) {})
-                    </x-data-table>
+                        @slot('actions', function ($category) {
+                            return view('components.action-buttons', [
+                            'editRoute' => 'categories.index',
+                            'deleteRoute' => 'categories.index',
+                            'itemId' => $category->id,
+                            'itemName' => 'category ' . $category->name,
+                            'modalId' => 'deleteModal-' . uniqId(),
+                            ]);
+                            })
+                        </x-data-table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</x-app-layout>
+    </x-app-layout>
