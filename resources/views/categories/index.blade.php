@@ -17,13 +17,13 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <x-data-table class="w-full" :items="$categories" :columns="[
-                        'name' => 'Nama',
-                        'created_at' => 'Tanggal Daftar',
+                        'name' => 'Name',
+                        'created_at' => 'Created At',
                     ]" paginated>
                         @slot('actions', function ($category) {
                             return view('components.action-buttons', [
-                            'editRoute' => 'categories.index',
-                            'deleteRoute' => 'categories.index',
+                            'editRoute' => 'categories.edit',
+                            'deleteRoute' => 'categories.destroy',
                             'itemId' => $category->id,
                             'itemName' => 'category ' . $category->name,
                             'modalId' => 'deleteModal-' . uniqId(),
@@ -35,7 +35,7 @@
             </div>
         </div>
 
-        <x-modal-form modal-id="createCategoryModal" title="Create Categories" action="{{ route('categories.index') }}"
+        <x-modal-form modal-id="createCategoryModal" title="Create Categories" action="{{ route('categories.store') }}"
             method="POST">
             @slot('body')
                 @include('categories.partials.create')
