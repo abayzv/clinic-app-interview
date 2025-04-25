@@ -1,4 +1,4 @@
-<div class="overflow-hidden rounded-lg">
+<div class="overflow-x-auto rounded-lg">
     <table class="{{ $class }}">
         <thead class="bg-gray-50">
             <tr>
