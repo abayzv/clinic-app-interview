@@ -25,38 +25,36 @@ to: resources/views/<%= resource %>/edit.blade.php
                         @csrf
                         @method('patch')
 
-<%
-  const fieldsArr = fields.split(',').map(f => {
-    const [name, type] = f.split(':').map(x => x.trim());
-    return { name, type };
-  });
+                        <%
+                        const fieldsArr = fields.split(',').map(f => {
+                        const [name, type] = f.split(':').map(x => x.trim());
+                        return { name, type };
+                        });
 
-  const label = (str) => str.charAt(0).toUpperCase() + str.slice(1).replace(/_/g, ' ');
-  const varName = resource.slice(0, -1); // singular
-%>
+                        const label = (str) => str.charAt(0).toUpperCase() + str.slice(1).replace(/_/g, ' ');
+                        const varName = resource.slice(0, -1); // singular
+                        %>
 
-<% fieldsArr.forEach(({ name, type }) => { %>
-  <div>
-    <x-input-label for="<%= name %>" :value="__(' <%= label(name) %>')" />
-
-    <% if (type === 'select') { %>
-      <x-select id="<%= name %>" name="<%= name %>" class="mt-1 block w-full" required>
-        <option value="">Select a <%= label(name) %></option>
-        @foreach ($<%= name.replace('_id', 's') %> as $item)
-          <option value="{{ $item->id }}"
-              {{ old('<%= name %>', $<%= varName %>-><%= name %>) == $item->id ? 'selected' : '' }}>
-              {{ $item->name }}
-          </option>
-        @endforeach
-      </x-select>
-    <% } else { %>
-      <x-text-input id="<%= name %>" name="<%= name %>" type="<%= type %>" class="mt-1 block w-full"
-        :value="old('<%= name %>', $<%= varName %>-><%= name %>)" required />
-    <% } %>
-
-    <x-input-error class="mt-2" :messages="$errors->get('<%= name %>')" />
-  </div>
-<% }); %>
+                        <% fieldsArr.forEach(({ name, type }) => { %>
+                        <div>
+                        <x-input-label for="<%= name %>" :value="__(' <%= label(name) %>')" />
+                        <% if (type === 'select') { %>
+                            <x-select id="<%= name %>" name="<%= name %>" class="mt-1 block w-full" required>
+                            <option value="">Select a <%= label(name) %></option>
+                            @foreach ($<%= name.replace('_id', 's') %> as $item)
+                                <option value="{{ $item->id }}"
+                                    {{ old('<%= name %>', $<%= varName %>-><%= name %>) == $item->id ? 'selected' : '' }}>
+                                    {{ $item->name }}
+                                </option>
+                            @endforeach
+                            </x-select>
+                        <% } else { %>
+                            <x-text-input id="<%= name %>" name="<%= name %>" type="<%= type %>" class="mt-1 block w-full"
+                            :value="old('<%= name %>', $<%= varName %>-><%= name %>)" required />
+                        <% } %>
+                        <x-input-error class="mt-2" :messages="$errors->get('<%= name %>')" />
+                        </div>
+                        <% }); %>
 
                         <div class="flex items-center gap-4">
                             <x-primary-button>{{ __('Save') }}</x-primary-button>
