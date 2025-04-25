@@ -15,11 +15,4 @@ class Category extends Model
     protected $fillable = [
         'name',
     ];
-
-    public function scopeWithNewOrders($query)
-    {
-        return $query->with(['orders' => function ($q) {
-            $q->where('created_at', '>', Carbon::today()->subWeek());
-        }]);
-    }
 }
