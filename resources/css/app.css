@@ -48,3 +48,21 @@ input[type=number]::-webkit-outer-spin-button {
    opacity: 1;
 
 }
+
+.bg-animate {
+    animation: moveZoom 10s ease-in-out infinite alternate;
+    transform-origin: center;
+  }
+  
+  @keyframes moveZoom {
+    0% {
+      transform: translateX(-10px) scale(1);
+    }
+    50% {
+      transform: translateX(10px) scale(1.05);
+    }
+    100% {
+      transform: translateX(-10px) scale(1);
+    }
+  }
+  

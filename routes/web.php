@@ -10,7 +10,7 @@ use App\Http\Controllers\SaleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->to('/dashboard');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
