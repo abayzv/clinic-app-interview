@@ -17,6 +17,24 @@ class Sale extends Model
         'total_price'
     ];
 
+    protected static function booted()
+    {
+        static::creating(function ($sale) {
+            $date = now()->format('Ymd');
+            $lastSale = self::whereDate('created_at', now()->toDateString())
+                ->orderBy('id', 'desc')
+                ->first();
+
+            $lastNumber = 0;
+            if ($lastSale && preg_match('/\-(\d+)$/', $lastSale->invoice_number, $matches)) {
+                $lastNumber = (int) $matches[1];
+            }
+
+            $newNumber = str_pad($lastNumber + 1, 3, '0', STR_PAD_LEFT);
+            $sale->invoice_number = 'INV' . $date . '-' . $newNumber;
+        });
+    }
+
     protected function totalPrice(): Attribute
     {
         return Attribute::make(

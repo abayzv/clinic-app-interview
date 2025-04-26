@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Customer;
 use App\Models\Sale;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class SaleController extends Controller
 {
@@ -19,14 +21,15 @@ class SaleController extends Controller
     public function create()
     {
         $products = Product::all();
-        return view('sales.create', compact('products'));
+        $categories = Category::all();
+        $customers = Customer::all();
+        return Inertia::render('Sales/Index', compact('products', 'categories', 'customers'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'invoice_number' => 'required|string|unique:sales',
-            'customer_name' => 'required|string|max:255',
+        $validated = $request->validate([
+            'customer_id' => 'required|exists:customers,id',
             'discount' => 'nullable|numeric|min:0',
             'products' => 'required|array',
             'products.*.id' => 'required|exists:products,id',
@@ -41,9 +44,8 @@ class SaleController extends Controller
         $total -= $request->discount ?? 0;
 
         $sale = Sale::create([
-            'invoice_number' => $request->invoice_number,
-            'customer_name' => $request->customer_name,
-            'discount' => $request->discount,
+            'customer_id' => $request->customer_id,
+            'discount' => $request->discount ?? 0,
             'total_price' => $total
         ]);
 
@@ -59,8 +61,10 @@ class SaleController extends Controller
                 ->decrement('stock', $product['quantity']);
         }
 
-        return redirect()->route('sales.show', $sale)
-            ->with('success', 'Sale created successfully.');
+        return response()->json([
+            'success' => true,
+            'data' => $sale
+        ]);
     }
 
     public function show(Sale $sale)
@@ -71,7 +75,6 @@ class SaleController extends Controller
 
     public function destroy(Sale $sale)
     {
-        // Optional: Restore product stock before deletion
         foreach ($sale->saleDetails as $detail) {
             Product::where('id', $detail->product_id)
                 ->increment('stock', $detail->quantity);
