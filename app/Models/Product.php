@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class Product extends Model
 {
@@ -41,6 +42,13 @@ class Product extends Model
         return Attribute::make(
             get: fn($value) => number_format($value, 0, ',', ''),
             set: fn($value) => $value
+        );
+    }
+
+    protected function qrcode(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => QrCode::size(200)->generate($this->sku)
         );
     }
 }

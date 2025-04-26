@@ -1,3 +1,5 @@
+@section('title', 'Products')
+
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center justify-between">
@@ -5,10 +7,17 @@
                 {{ __('Products') }}
             </h2>
 
-            <button onclick="openModal('createCategoryModal')"
-                class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">
-                + Add Product
-            </button>
+            <div>
+                <button onclick="openModal('createCategoryModal')"
+                    class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">
+                    + Add Product
+                </button>
+                <a href="/products/scan">
+                    <button class="px-4 py-2 bg-green-500 text-white rounded hover:bg-blue-700 text-sm">
+                        Scan
+                    </button>
+                </a>
+            </div>
         </div>
     </x-slot>
 
@@ -26,15 +35,30 @@
                         'created_at' => 'Created At',
                     ]" paginated>
                         @slot('actions', function ($product) {
-                            return view('components.action-buttons', [
-                            'editRoute' => 'products.edit',
-                            'deleteRoute' => 'products.destroy',
-                            'itemId' => $product->id,
-                            'itemName' => 'product ' . $product->name,
-                            'modalId' => 'deleteModal-' . uniqId(),
-                            ]);
+                            return view('components.actions.product', ['product' => $product]);
                             })
                         </x-data-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="qrModal" class="modal hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+            <div class="modal-content relative top-20 mx-auto p-5 border max-w-lg shadow-lg rounded-md bg-white">
+                <div class="mt-3 text-center">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="qrTitle">QR Code</h3>
+                    <div class="mt-2 px-7 py-3">
+                        <div id="qrContainer" class="flex justify-center"></div>
+                    </div>
+                    <div class="flex justify-center gap-4 px-4 py-3">
+                        <button onclick="closeModal('qrModal')"
+                            class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300">
+                            Cancel
+                        </button>
+                        <button onclick="downloadQrCode()"
+                            class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+                            Download QR
+                        </button>
                     </div>
                 </div>
             </div>
