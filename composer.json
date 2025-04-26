@@ -60,6 +60,15 @@
         "test": [
             "@php artisan config:clear --ansi",
             "@php artisan test"
+        ],
+        "setup": [
+            "@php -r \"if (!file_exists('.env')) { copy('.env.example', '.env'); echo '.env copied from .env.example' . PHP_EOL; }\"",
+            "composer install",
+            "@php artisan key:generate",
+            "@php artisan migrate",
+            "@php artisan db:seed",
+            "npm install",
+            "npm run build"
         ]
     },
     "extra": {
