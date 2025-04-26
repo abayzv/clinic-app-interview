@@ -5,10 +5,17 @@
                 {{ __('Products') }}
             </h2>
 
-            <button onclick="openModal('createCategoryModal')"
-                class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">
-                + Add Product
-            </button>
+            <div>
+                <button onclick="openModal('createCategoryModal')"
+                    class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">
+                    + Add Product
+                </button>
+                <a href="/products/scan">
+                    <button class="px-4 py-2 bg-green-500 text-white rounded hover:bg-blue-700 text-sm">
+                        Scan
+                    </button>
+                </a>
+            </div>
         </div>
     </x-slot>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ProductController extends Controller
 {
@@ -72,5 +73,27 @@ class ProductController extends Controller
 
         return redirect()->route('products.index')
             ->with('success', 'Product deleted successfully.');
+    }
+
+    public function scan()
+    {
+        return Inertia::render('Qr/Scan');
+    }
+
+    public function scanProduct(String $sku)
+    {
+        try {
+            $product = Product::with('category')->where('sku', $sku)->first();
+
+            return response()->json([
+                'status' => 'success',
+                'product' => $product
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'success',
+                'messages' => 'Failed to get product'
+            ], 404);
+        }
     }
 }
