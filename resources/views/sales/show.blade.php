@@ -1,3 +1,5 @@
+@section('title', $sale->invoice_number)
+
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center justify-between">
