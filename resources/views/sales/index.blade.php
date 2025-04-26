@@ -5,10 +5,11 @@
                 {{ __('Sales') }}
             </h2>
 
-            <button onclick="openModal('createSalesModal')"
-                class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">
-                + Add Sales
-            </button>
+            <a href="/sales/create">
+                <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">
+                    + Add Sales
+                </button>
+            </a>
         </div>
     </x-slot>
 
