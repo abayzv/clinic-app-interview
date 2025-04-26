@@ -7,7 +7,7 @@ export default function ProductGrid() {
     const { addToCart } = useCart()
 
     return (
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
             {
                 filteredProducts.map((product: Product) => (
                     <div
