@@ -1,3 +1,68 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.modal {
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+.modal-content {
+    animation: modalFadeIn 0.3s ease-out;
+}
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media print {
+    @page {
+        size: A4;
+    }
+
+    body * {
+        visibility: hidden;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    .print, .print * {
+        visibility: visible;
+    }
+    .print {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+        overflow: hidden;
+        display: unset;
+    }
+    
+    button {
+        display: none;
+    }
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {  
+
+   opacity: 1;
+
+}
+
+.bg-animate {
+    animation: moveZoom 10s ease-in-out infinite alternate;
+    transform-origin: center;
+  }
+  
+  @keyframes moveZoom {
+    0% {
+      transform: translateX(-10px) scale(1);
+    }
+    50% {
+      transform: translateX(10px) scale(1.05);
+    }
+    100% {
+      transform: translateX(-10px) scale(1);
+    }
+  }
+  

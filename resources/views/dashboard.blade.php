@@ -7,10 +7,13 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
+            <div class="grid lg:grid-cols-3 gap-4">
+                <x-summary-card name="Total Product" :value="$metrics['total_products']" />
+                <x-summary-card name="Total Categories" :value="$metrics['total_categories']" />
+                <x-summary-card name="Total Customers" :value="$metrics['total_customers']" />
+                <x-summary-card name="Total Sales" :value="$metrics['total_sales']" />
+                <x-summary-card name="Total Product Sales" :value="$metrics['total_products_sold']" />
+                <x-summary-card name="Total Revenue" :value="'Rp. ' . number_format($metrics['total_revenue'])" />
             </div>
         </div>
     </div>
