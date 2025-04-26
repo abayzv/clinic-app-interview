@@ -29,9 +29,9 @@ export default function SalesMain() {
 
     return (
         <div className="container mx-auto py-4 px-2">
-            <div className="flex gap-4 items-start">
-                <div className="flex-1 bg-white rounded shadow p-5 min-h-[32rem]">
-                    <div className="mb-5 flex justify-between items-center">
+            <div className="flex flex-col lg:flex-row  gap-4 items-start">
+                <div className="flex-1 bg-white rounded shadow p-5 min-h-[32rem] w-full">
+                    <div className="mb-5 flex flex-col lg:flex-row w-full gap-2 justify-between items-center">
                         <h3 className="text-xl font-semibold">Kusuma Beauty Clinic</h3>
                         <div className="flex gap-2">
                             <button
@@ -52,7 +52,7 @@ export default function SalesMain() {
                         </>
                     )}
                 </div>
-                <div className="w-1/3 bg-white rounded shadow space-y-3 p-5">
+                <div className="lg:w-1/3 w-full bg-white rounded shadow space-y-3 p-5">
                     <CustomerSelect />
                     <CartPanel />
                 </div>
