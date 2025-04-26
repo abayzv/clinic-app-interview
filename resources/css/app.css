@@ -13,3 +13,31 @@
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+@media print {
+    @page {
+        size: A4;
+    }
+
+    body * {
+        visibility: hidden;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    .print, .print * {
+        visibility: visible;
+    }
+    .print {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+        overflow: hidden;
+        display: unset;
+    }
+    
+    button {
+        display: none;
+    }
+}

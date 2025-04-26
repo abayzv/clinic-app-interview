@@ -28,7 +28,14 @@ class Sale extends Model
     protected function formattedTotalPrice(): Attribute
     {
         return Attribute::make(
-            get: fn() => 'Rp ' . number_format($this->total_price, 0, ',', '.')
+            get: fn() => 'Rp ' . number_format($this->total_price, 0, ',', ',')
+        );
+    }
+
+    protected function formattedDiscount(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => 'Rp ' . number_format($this->discount, 0, ',', ',')
         );
     }
 
