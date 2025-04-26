@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Invoice') }}
+                #{{ $sale->invoice_number }}
             </h2>
         </div>
     </x-slot>
@@ -14,7 +14,7 @@
                     <div class="flex justify-between items-center p-6 border-b">
                         <div>
                             <h1 class="text-2xl font-bold text-gray-800">#{{ $sale->invoice_number }}</h1>
-                            <p class="text-gray-600">{{ $sale->created_at }}</p>
+                            <p class="text-gray-600 italic text-sm">{{ $sale->created_at }}</p>
                         </div>
                         <div class="flex space-x-2">
                             <button onclick="window.print()"
@@ -30,11 +30,11 @@
                         <div class="flex" style="margin-bottom: 2rem">
                             <div class="flex-1 border p-4">
                                 <h2 class="text-lg font-semibold text-gray-800 mb-2">From</h2>
-                                <p class="text-gray-700">Your Company Name</p>
-                                <p class="text-gray-700">123 Business Street</p>
-                                <p class="text-gray-700">City, State ZIP</p>
-                                <p class="text-gray-700">Phone: (123) 456-7890</p>
-                                <p class="text-gray-700">Email: info@yourcompany.com</p>
+                                <p class="text-gray-700">Kusuma Beauty Clinic</p>
+                                <p class="text-gray-700">Jl. Pajajaran No. 123</p>
+                                <p class="text-gray-700">Jakarta, Indonesia 10110</p>
+                                <p class="text-gray-700">Telepon: (021) 123-4567</p>
+                                <p class="text-gray-700">Email: info@kusumabeautyclinic.com</p>
                             </div>
 
                             <div class="flex-1 border p-4">
@@ -134,11 +134,11 @@
             <div class="flex" style="margin-bottom: 2rem">
                 <div class="flex-1 border p-4">
                     <h2 class="text-lg font-semibold text-gray-800 mb-2">From</h2>
-                    <p class="text-gray-700">Your Company Name</p>
-                    <p class="text-gray-700">123 Business Street</p>
-                    <p class="text-gray-700">City, State ZIP</p>
-                    <p class="text-gray-700">Phone: (123) 456-7890</p>
-                    <p class="text-gray-700">Email: info@yourcompany.com</p>
+                    <p class="text-gray-700">Kusuma Beauty Clinic</p>
+                    <p class="text-gray-700">Jl. Pajajaran No. 123</p>
+                    <p class="text-gray-700">Jakarta, Indonesia 10110</p>
+                    <p class="text-gray-700">Telepon: (021) 123-4567</p>
+                    <p class="text-gray-700">Email: info@kusumabeautyclinic.com</p>
                 </div>
 
                 <div class="flex-1 border p-4">
